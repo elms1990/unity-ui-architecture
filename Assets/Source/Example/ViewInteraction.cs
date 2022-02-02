@@ -5,7 +5,7 @@
 
     public class TextChanged : ViewInteraction
     {
-        public string Value;
+        public readonly string Value;
 
         public TextChanged(string value)
         {

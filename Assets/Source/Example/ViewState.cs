@@ -4,7 +4,7 @@
 
     public class ButtonEnabled : ViewState
     {
-        public bool Enabled;
+        public readonly bool Enabled;
 
         public ButtonEnabled(bool enabled)
         {

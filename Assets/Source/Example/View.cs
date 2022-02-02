@@ -36,7 +36,7 @@ public class View : MonoBehaviour
 
     private void HandleButtonEnabled(ViewState state)
     {
-        UpdateButton((state as ViewState.ButtonEnabled).Enabled);
+        UpdateButton(((ViewState.ButtonEnabled) state).Enabled);
         UpdateCurrentState(state);
     }
 

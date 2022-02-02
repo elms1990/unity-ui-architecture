@@ -1,4 +1,6 @@
-﻿public class ViewModel : BaseViewModel<ViewInteraction, ViewState>
+﻿using UIArchitecture;
+
+public class ViewModel : BaseViewModel<ViewInteraction, ViewState>
 {
     public ViewModel()
     {
@@ -19,7 +21,7 @@
 
     private void HandleTextChanged(ViewInteraction interaction)
     {
-        var castInteraction = (interaction as ViewInteraction.TextChanged);
+        var castInteraction = (ViewInteraction.TextChanged) interaction;
         if (castInteraction.Value.Length > 3)
         {
             Emit(new ViewState.ButtonEnabled(true));
