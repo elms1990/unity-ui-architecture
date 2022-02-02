@@ -1,4 +1,5 @@
-﻿using UIArchitecture;
+﻿using System.Threading.Tasks;
+using UIArchitecture;
 
 public class ViewModel : BaseViewModel<ViewInteraction, ViewState>
 {
@@ -9,17 +10,18 @@ public class ViewModel : BaseViewModel<ViewInteraction, ViewState>
         OnInteraction<ViewInteraction.TextChanged>(HandleTextChanged);
     }
 
-    private void HandleOpened(ViewInteraction interaction)
+    private async Task HandleOpened(ViewInteraction interaction)
     {
         Emit(new ViewState.Initial());
     }
 
-    private void HandleButtonClicked(ViewInteraction interaction)
+    private async Task HandleButtonClicked(ViewInteraction interaction)
     {
+        await Task.Delay(2000);
         Emit(new ViewState.Finished());
     }
 
-    private void HandleTextChanged(ViewInteraction interaction)
+    private async Task HandleTextChanged(ViewInteraction interaction)
     {
         var castInteraction = (ViewInteraction.TextChanged) interaction;
         if (castInteraction.Value.Length > 3)

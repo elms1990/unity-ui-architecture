@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UIArchitecture
 {
@@ -8,8 +9,8 @@ namespace UIArchitecture
         private readonly Dictionary<Type, Action<TState>> _stateHandlers =
             new Dictionary<Type, Action<TState>>();
 
-        private readonly Dictionary<Type, Action<TInteraction>> _interactionHandlers =
-            new Dictionary<Type, Action<TInteraction>>();
+        private readonly Dictionary<Type, AsyncAction<TInteraction>> _interactionHandlers =
+            new Dictionary<Type, AsyncAction<TInteraction>>();
 
         public void OnState<T>(Action<TState> handler) where T : TState
         {
@@ -23,13 +24,13 @@ namespace UIArchitecture
             _stateHandlers[typeOfT](newState);
         }
 
-        public void Interact<T>(T interaction) where T : TInteraction
+        public async void Interact<T>(T interaction) where T : TInteraction
         {
             var typeOfT = typeof(T);
-            _interactionHandlers[typeOfT](interaction);
+            await _interactionHandlers[typeOfT](interaction);
         }
 
-        protected void OnInteraction<T>(Action<TInteraction> interactionHandler) where T : TInteraction
+        protected void OnInteraction<T>(AsyncAction<TInteraction> interactionHandler) where T : TInteraction
         {
             var typeOfT = typeof(T);
             _interactionHandlers[typeOfT] = interactionHandler;
